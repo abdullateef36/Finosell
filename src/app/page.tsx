@@ -100,7 +100,7 @@ export default function Dashboard() {
           <div className="w-1/2">
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <div className="flex items-center justify-between mb-8">
-                <h3 className="text-lg font-semibold text-gray-900">Store Metrics</h3>
+                <h3 className="text-sm font-semibold text-gray-900">Store Metrics</h3>
                 <div className="flex gap-6 text-sm">
                   <button className="flex items-center gap-2 text-yellow-600 font-medium">
                     <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
