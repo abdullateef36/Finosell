@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+/* Define light theme variables */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --font-sans: var(--font-inter);
+}
+
+/* Define dark theme overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* Apply global styles */
+body {
+  @apply bg-[var(--background)] text-[var(--foreground)] antialiased;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Optional: Customize scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #eab308; /* Tailwind's yellow-500 */
+  border-radius: 9999px;
+}
