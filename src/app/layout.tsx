@@ -1,13 +1,13 @@
-// app/layout.tsx or app/layout.ts
+// app/layout.tsx
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto_Mono } from "next/font/google";
 import "./globals.css";
 
-// Load Inter font
-const inter = Inter({
+// Load Roboto Mono font
+const robotoMono = Roboto_Mono({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-roboto-mono",
 });
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${robotoMono.variable} font-mono antialiased`}>
         {children}
       </body>
     </html>

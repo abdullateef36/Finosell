@@ -9,7 +9,8 @@ import {
   FiLogOut,
   FiPlus,
   FiArrowUpRight,
-  FiCopy
+  FiCopy,
+  FiCheck
 } from 'react-icons/fi';
 import {
   HiOutlineShoppingBag,
@@ -19,11 +20,11 @@ import {
 
 export default function Dashboard() {
   return (
-    <div className="flex min-h-screen font-sans text-gray-300 bg-gray-50">
+    <div className="flex min-h-screen font-sans text-gray-300 bg-gray-100">
       {/* Sidebar */}
       <aside className="w-64 bg-white border-r p-6 relative">
         <div className="flex items-center gap-3 mb-10">
-          <div className="w-8 h-8 bg-yellow-500 rounded flex items-center justify-center">
+          <div className="w-8 h-8 bg-yellow-600 rounded flex items-center justify-center">
             <HiOutlineShoppingBag className="text-white text-sm" />
           </div>
           <div className="font-semibold text-gray-700">Hello Oreofe</div>
@@ -49,14 +50,15 @@ export default function Dashboard() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-6">
-        <div className="flex gap-6">
+      <main className="flex-1 p-8">
+        <div className="flex gap-12">
           {/* Left Column - Balance and Account Info */}
           <div className="w-1/2">
             {/* Top Balance Section */}
             <div className="mb-8">
               <div className="flex gap-6 mb-6">
-                <button className="px-4 py-2 bg-yellow-500 text-white rounded-lg font-medium">
+                <button className="px-4 py-2 bg-yellow-600 text-white font-medium shadow hover:bg-yellow-700
+                 transition-colors rounded-tr-lg rounded-br-lg rounded-bl-lg">
                   Total Balance
                 </button>
                 <button className="px-4 py-2 text-gray-900 font-medium">
@@ -65,10 +67,10 @@ export default function Dashboard() {
               </div>
 
               <div className="mb-8">
-              <div className="text-5xl font-bold text-gray-800 mb-2">
-             ₦361,074<span className="text-gray-400 text-3xl">.76</span>
-            </div>
-            </div>
+                <div className="text-5xl font-bold text-gray-800 mb-2">
+                  ₦361,074<span className="text-gray-400 text-3xl">.76</span>
+                </div>
+              </div>
 
               {/* Account Cards */}
               <div className="space-y-6 mb-8">
@@ -83,14 +85,14 @@ export default function Dashboard() {
                   title="Add Money"
                   subtitle="Space for subtitle text"
                   bgColor="bg-yellow-50"
-                  iconColor="bg-yellow-500"
+                  iconColor="bg-yellow-600"
                 />
                 <ActionButton
                   icon={<FiArrowUpRight />}
                   title="Send Money"
                   subtitle="Space for subtitle text"
                   bgColor="bg-yellow-50"
-                  iconColor="bg-yellow-500"
+                  iconColor="bg-yellow-600"
                 />
               </div>
             </div>
@@ -98,39 +100,63 @@ export default function Dashboard() {
 
           {/* Right Column - Store Metrics */}
           <div className="w-1/2">
-            <div className="bg-white rounded-lg p-6 shadow-sm">
-              <div className="flex items-center justify-between mb-8">
-                <h3 className="text-lg font-semibold text-gray-900">Store Metrics</h3>
-                <div className="flex gap-6 text-sm">
-                  <button className="flex items-center gap-2 text-yellow-600 font-medium">
-                    <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                    Today
-                  </button>
-                  <button className="flex items-center gap-2 text-gray-500">
-                    <div className="w-2 h-2 border border-gray-300 rounded-full"></div>
-                    This Month
-                  </button>
-                  <button className="flex items-center gap-2 text-gray-500">
-                    <div className="w-2 h-2 border border-gray-300 rounded-full"></div>
-                    This Year
-                  </button>
-                  <button className="flex items-center gap-2 text-gray-500">
-                    <div className="w-2 h-2 border border-gray-300 rounded-full"></div>
-                    All
-                  </button>
+            {/* Store Metrics Header - Outside the card */}
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-semibold text-gray-900">Store Metrics</h3>
+              <div className="flex gap-4 text-xs ml-auto">
+                <button className="flex items-center gap-1.5 text-yellow-700 font-medium">
+                  <div className="w-3 h-3 bg-yellow-600 rounded-full flex items-center justify-center">
+                    <FiCheck className="text-white text-xs" />
+                  </div>
+                  Today
+                </button>
+                <button className="flex items-center gap-1.5 text-gray-500">
+                  <div className="w-3 h-3 border border-gray-300 rounded-full"></div>
+                  This Month
+                </button>
+                <button className="flex items-center gap-1.5 text-gray-500">
+                  <div className="w-3 h-3 border border-gray-300 rounded-full"></div>
+                  This Year
+                </button>
+                <button className="flex items-center gap-1.5 text-gray-500">
+                  <div className="w-3 h-3 border border-gray-300 rounded-full"></div>
+                  All
+                </button>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-300">
+              {/* Metrics Grid with crossing borders */}
+              <div className="mb-20 relative border border-gray-300">
+                 {/* Vertical Center Line */}
+               <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gray-200 -translate-x-px"></div>
+                {/* Horizontal Center Line */}
+               <div className="absolute left-0 right-0 top-1/2 h-px bg-gray-200 -translate-y-px"></div>
+
+
+                {/* Top Row */}
+                <div className="grid grid-cols-2">
+                  <div className="p-6 border-b border-r border-gray-300">
+                    <Metric label="Total Spending" value="₦213,660.90" />
+                  </div>
+                  <div className="p-6 border-b border-gray-300">
+                    <Metric label="Total Sales" value="₦198,231.01" />
+                  </div>
+                </div>
+
+                {/* Bottom Row */}
+                <div className="grid grid-cols-2">
+                  <div className="p-6 border-r border-gray-300">
+                    <Metric label="Number of Sales" value="4,923" />
+                  </div>
+                  <div className="p-6">
+                    <Metric label="Product Impressions" value="1,340,239" />
+                  </div>
                 </div>
               </div>
 
-              {/* Metrics Grid */}
-              <div className="grid grid-cols-2 gap-8 mb-10">
-                <Metric label="Total Spending" value="₦213,660.90" />
-                <Metric label="Total Sales" value="₦198,231.01" />
-                <Metric label="Number of Sales" value="4,923" />
-                <Metric label="Product Impressions" value="1,340,239" />
-              </div>
-
               {/* Cash Inflow Chart */}
-              <div className="mb-10">
+              <div className="mb-10 px-6">
                 <h4 className="font-semibold mb-4 text-gray-900 text-lg">Cash Inflow</h4>
 
                 <div className="relative">
@@ -155,30 +181,45 @@ export default function Dashboard() {
                     <div className="font-semibold text-gray-900 text-xs font-bold">$230,171.90</div>
                   </div>
 
-                  {/* Chart container */}
-                  <div className="ml-8 relative">
-                    {/* Chart bars */}
-                    <div className="flex items-end gap-1 h-40">
-                      {[800, 900, 850, 950, 1100, 1050, 1200, 1300, 1450, 1400, 1600, 1750, 1900, 1850, 2000, 2100, 2200, 2300, 2200, 2400].map((val, i) => (
-                        <div
-                          key={i}
-                          className="bg-yellow-500 rounded-t-sm flex-1 min-w-0"
-                          style={{ height: `${(val / 2500) * 100}%` }}
-                        />
-                      ))}
-                    </div>
+                      <div className="ml-8 relative">
+                      {/* Chart bars with varying heights */}
+                      <div className="flex items-end gap-1 h-40">
+                        {[1200, 900, 1100, 850, 1300, 950, 1400, 1050, 1500, 1200, 1600, 1350, 1700, 1550, 1800, 1650, 1900, 1750, 2000, 2100].map((val, i) => (
+                          <div
+                            key={i}
+                            className="bg-yellow-600 rounded-t-sm flex-1 min-w-0"
+                            style={{
+                              height: `${((val - (i % 3 * 100)) / 2500) * 100}%`
+                            }}
+                          />
+                        ))}
+                      </div>
 
-                    {/* Trend line */}
-                    <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                      <polyline
-                        fill="none"
-                        stroke="#374151"
-                        strokeWidth="2"
-                        points="10,120 30,110 50,115 70,105 90,90 110,95 130,80 150,70 170,55 190,60 210,45 230,35 250,25 270,30 290,20 310,15 330,10 350,15 370,5 390,0"
-                      />
-                      <circle cx="390" cy="0" r="3" fill="#374151" />
-                    </svg>
-                  </div>
+                      {/* Trend line - positioned above bars without touching them */}
+                      <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                        <polyline
+                          fill="none"
+                          stroke="#4B5563"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          points="
+                            15,120 35,110 55,115 75,105 95,90 115,95 135,80 155,70
+                            175,55 195,60 215,45 235,35 255,25 275,30 295,20 315,15
+                            335,10 355,15 375,5 395,0
+                          "
+                        />
+                        {/* Circle positioned at the middle of trend line */}
+                        <circle
+                          cx="210"
+                          cy="50"
+                          r="4"
+                          fill="#FFFFFF"
+                          stroke="#000"
+                          strokeWidth="1.5"
+                        />
+                      </svg>
+                    </div>
 
                   {/* X-axis labels */}
                   <div className="flex justify-between text-xs text-gray-500 mt-4 ml-8">
@@ -191,7 +232,7 @@ export default function Dashboard() {
 
               {/* Best Selling Products */}
               <div>
-                <h4 className="font-semibold mb-6 text-gray-900 text-lg">Best Selling Products</h4>
+                <h4 className="font-semibold mb-6 text-gray-900 text-lg ml-10">Best Selling Products</h4>
                 <div className="flex items-end justify-center gap-4 h-52">
                   {[
                     { value: 97, label: '97' },
@@ -202,7 +243,7 @@ export default function Dashboard() {
                   ].map((item, i) => (
                     <div key={i} className="text-center relative">
                       <div
-                        className="w-16 bg-yellow-500 mx-auto rounded-tr-2xl relative flex items-start justify-center pt-3"
+                        className="w-16 bg-yellow-600 mx-auto rounded-tr-2xl relative flex items-start justify-center pt-3"
                         style={{ height: `${(item.value / 215) * 160}px` }}
                       >
                         <span className="text-sm font-semibold text-white">
