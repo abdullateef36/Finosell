@@ -135,8 +135,8 @@ export default function Dashboard() {
 
 
                 {/* Top Row */}
-                <div className="grid grid-cols-2">
-                  <div className="p-6 border-b border-r border-gray-300">
+                <div className="grid grid-cols-2 text-center font-semibold">
+                  <div className="p-6 border-b border-r border-gray-300 ">
                     <Metric label="Total Spending" value="₦213,660.90" />
                   </div>
                   <div className="p-6 border-b border-gray-300">
@@ -145,7 +145,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Bottom Row */}
-                <div className="grid grid-cols-2">
+                <div className="grid grid-cols-2 text-center font-semibold">
                   <div className="p-6 border-r border-gray-300">
                     <Metric label="Number of Sales" value="4,923" />
                   </div>
