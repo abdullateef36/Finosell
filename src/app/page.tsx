@@ -57,7 +57,8 @@ export default function Dashboard() {
             {/* Top Balance Section */}
             <div className="mb-8">
               <div className="flex gap-6 mb-6">
-                <button className="px-4 py-2 bg-yellow-600 text-white font-medium shadow hover:bg-yellow-700 transition-colors rounded-tr-lg rounded-br-lg rounded-bl-lg">
+                <button className="px-4 py-2 bg-yellow-600 text-white font-medium shadow hover:bg-yellow-700
+                 transition-colors rounded-tr-lg rounded-br-lg rounded-bl-lg">
                   Total Balance
                 </button>
                 <button className="px-4 py-2 text-gray-900 font-medium">
