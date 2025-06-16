@@ -24,7 +24,7 @@ export default function Dashboard() {
       {/* Sidebar */}
       <aside className="w-64 bg-white border-r p-6 relative">
         <div className="flex items-center gap-3 mb-10">
-          <div className="w-8 h-8 bg-yellow-600 rounded flex items-center justify-center">
+          <div className="w-8 h-8 bg-yellow-600 rounded flex items-center justify-center ml-2">
             <HiOutlineShoppingBag className="text-white text-sm" />
           </div>
           <div className="font-semibold text-gray-700">Hello Oreofe</div>
@@ -53,7 +53,7 @@ export default function Dashboard() {
       <main className="flex-1 p-8">
         <div className="flex gap-12">
           {/* Left Column - Balance and Account Info */}
-          <div className="w-1/2">
+          <div className="w-1/2 px-14">
             {/* Top Balance Section */}
             <div className="mb-8">
               <div className="flex gap-6 mb-6">
@@ -73,7 +73,7 @@ export default function Dashboard() {
               </div>
 
               {/* Account Cards */}
-              <div className="space-y-6 mb-8">
+              <div className="space-y-6 mb-10">
                 <AccountCard type="Main Account" />
                 <AccountCard type="Sub Account" />
               </div>
@@ -157,11 +157,11 @@ export default function Dashboard() {
 
               {/* Cash Inflow Chart */}
               <div className="mb-10 px-6">
-                <h4 className="font-semibold mb-4 text-gray-900 text-lg">Cash Inflow</h4>
+                <h4 className="font-semibold mb-17 text-gray-900 text-lg">Cash Inflow</h4>
 
-                <div className="relative">
+                <div className="relative px-8">
                   {/* Y-axis labels */}
-                  <div className="absolute left-0 top-2 h-40 flex flex-col justify-between text-xs text-gray-400 py-2">
+                  <div className="absolute left-7 -top-14 h-64 flex flex-col justify-between text-xs text-gray-400 py-2">
                     <span>3000</span>
                     <span>2500</span>
                     <span>2000</span>
@@ -172,7 +172,7 @@ export default function Dashboard() {
                   </div>
 
                   {/* Chart info - positioned above the chart on the right */}
-                  <div className="absolute -top-13 right-30">
+                  <div className="absolute -top-18 right-28 border border-gray-100 rounded-lg bg-white p-3 shadow-sm">
                     <div className="text-xs text-gray-700 mb-1">April 2021</div>
                     <div className="flex items-center gap-2 text-xs mb-1">
                       <span className="w-1.5 h-1.5 bg-gray-900 rounded-full"></span>
@@ -323,7 +323,8 @@ type ActionButtonProps = {
 
 function ActionButton({ icon, title, subtitle, bgColor, iconColor }: ActionButtonProps) {
   return (
-    <div className={`${bgColor} rounded-lg p-4 cursor-pointer hover:shadow-sm transition-shadow`}>
+    <div className={`${bgColor} rounded-lg p-4 cursor-pointer hover:shadow-sm border border-gray-300
+    transition-shadow`}>
       <div className="flex items-center gap-3">
         <div className={`w-10 h-10 ${iconColor} rounded-lg flex items-center justify-center text-white font-bold`}>
           {icon}
