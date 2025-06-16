@@ -141,14 +141,14 @@ export default function Dashboard() {
                   icon={<FiPlus />}
                   title="Add Money"
                   subtitle="Space for subtitle text"
-                  bgColor="bg-yellow-50"
+                  bgColor="bg-grey-100"
                   iconColor="bg-yellow-600"
                 />
                 <ActionButton
                   icon={<FiArrowUpRight />}
                   title="Send Money"
                   subtitle="Space for subtitle text"
-                  bgColor="bg-yellow-50"
+                  bgColor="bg-grey-100"
                   iconColor="bg-yellow-600"
                 />
               </div>
