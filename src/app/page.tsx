@@ -33,8 +33,8 @@ export default function Dashboard() {
     sidebarOpen ? 'w-64 p-6 border-r' : 'w-0 p-0 border-none'
   } bg-white relative transition-all duration-300 ease-in-out overflow-hidden`}>
         <div className={`flex items-center justify-between mb-10 ${!sidebarOpen ? 'hidden' : ''}`}>
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-yellow-600 rounded flex items-center justify-center">
+          <div className="flex items-center gap-3 mt-4">
+            <div className="w-8 h-8 bg-yellow-600 rounded flex items-center justify-center ml-3">
               <HiOutlineShoppingBag className="text-white text-sm" />
             </div>
             <div className="font-semibold text-gray-700 flex items-center gap-2">
