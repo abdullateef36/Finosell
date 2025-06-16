@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from 'react';
 import {
   FiHome,
   FiDollarSign,
@@ -10,55 +13,87 @@ import {
   FiPlus,
   FiArrowUpRight,
   FiCopy,
-  FiCheck
+  FiCheck,
+  FiMenu
 } from 'react-icons/fi';
 import {
   HiOutlineShoppingBag,
   HiOutlineUsers,
   HiOutlinePaperAirplane
 } from 'react-icons/hi';
+import { IoIosArrowDown } from "react-icons/io";
 
 export default function Dashboard() {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
   return (
     <div className="flex min-h-screen font-sans text-gray-300 bg-gray-100">
       {/* Sidebar */}
-      <aside className="w-64 bg-white border-r p-6 relative">
-        <div className="flex items-center gap-3 mb-10">
-          <div className="w-8 h-8 bg-yellow-600 rounded flex items-center justify-center ml-2">
-            <HiOutlineShoppingBag className="text-white text-sm" />
+      <aside className={`${
+    sidebarOpen ? 'w-64 p-6 border-r' : 'w-0 p-0 border-none'
+  } bg-white relative transition-all duration-300 ease-in-out overflow-hidden`}>
+        <div className={`flex items-center justify-between mb-10 ${!sidebarOpen ? 'hidden' : ''}`}>
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-yellow-600 rounded flex items-center justify-center">
+              <HiOutlineShoppingBag className="text-white text-sm" />
+            </div>
+            <div className="font-semibold text-gray-700 flex items-center gap-2">
+              Hello Oreofe
+              {/* Close icon (X) beside name */}
+              <button
+                onClick={() => setSidebarOpen(false)}
+                className="text-gray-500 hover:text-gray-700 transition-colors"
+              >
+                <IoIosArrowDown className="text-base" />
+              </button>
+            </div>
           </div>
-          <div className="font-semibold text-gray-700">Hello Oreofe</div>
         </div>
-        <nav className="flex flex-col gap-1 text-gray-600">
-          <SidebarItem icon={<FiHome />} label="Home" active />
-          <SidebarItem icon={<FiDollarSign />} label="Finance" />
-          <SidebarItem icon={<FiPieChart />} label="Budget" />
-          <SidebarItem icon={<FiCreditCard />} label="Expense" />
-          <SidebarItem icon={<FiUser />} label="Account" />
-          <SidebarItem icon={<HiOutlinePaperAirplane />} label="Travels" />
-          <SidebarItem icon={<HiOutlineUsers />} label="Payroll" />
-          <SidebarItem icon={<FiHelpCircle />} label="Help" />
-          <SidebarItem icon={<FiGift />} label="Refer & Reward" />
-          <SidebarItem icon={<FiLogOut />} label="Logout" />
-        </nav>
-        <div className="absolute bottom-6 left-6 flex items-center gap-2">
-          <div className="w-6 h-6 bg-gray-800 rounded flex items-center justify-center">
-            <span className="text-white font-bold text-xs">f</span>
-          </div>
-          <span className="text-sm text-gray-600 font-medium">finosell.</span>
-        </div>
+
+
+        {sidebarOpen && (
+          <>
+            <nav className="flex flex-col gap-1 text-gray-600">
+              <SidebarItem icon={<FiHome />} label="Home" active />
+              <SidebarItem icon={<FiDollarSign />} label="Finance" />
+              <SidebarItem icon={<FiPieChart />} label="Budget" />
+              <SidebarItem icon={<FiCreditCard />} label="Expense" />
+              <SidebarItem icon={<FiUser />} label="Account" />
+              <SidebarItem icon={<HiOutlinePaperAirplane />} label="Travels" />
+              <SidebarItem icon={<HiOutlineUsers />} label="Payroll" />
+              <SidebarItem icon={<FiHelpCircle />} label="Help" />
+              <SidebarItem icon={<FiGift />} label="Refer & Reward" />
+              <SidebarItem icon={<FiLogOut />} label="Logout" />
+            </nav>
+            <div className="absolute bottom-6 left-6 flex items-center gap-2">
+              <div className="w-6 h-6 bg-gray-800 rounded flex items-center justify-center">
+                <span className="text-white font-bold text-xs">f</span>
+              </div>
+              <span className="text-sm text-gray-600 font-medium">finosell.</span>
+            </div>
+          </>
+        )}
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-8 relative">
+        {/* Hamburger menu (☰) - visible when sidebar is closed */}
+        {!sidebarOpen && (
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="absolute left-4 top-4 text-gray-500 hover:text-gray-700 transition-colors z-10"
+          >
+            <FiMenu className="text-2xl mt-6" />
+          </button>
+        )}
+
         <div className="flex gap-12">
           {/* Left Column - Balance and Account Info */}
           <div className="w-1/2 px-14">
             {/* Top Balance Section */}
             <div className="mb-8">
               <div className="flex gap-6 mb-6">
-                <button className="px-4 py-2 bg-yellow-600 text-white font-medium shadow hover:bg-yellow-700
-                 transition-colors rounded-tr-lg rounded-br-lg rounded-bl-lg">
+                <button className="px-4 py-2 bg-yellow-600 text-white font-medium shadow hover:bg-yellow-700 transition-colors rounded-tr-lg rounded-br-lg rounded-bl-lg">
                   Total Balance
                 </button>
                 <button className="px-4 py-2 text-gray-900 font-medium">
@@ -125,9 +160,9 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-300">
+            <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100">
               {/* Metrics Grid with crossing borders */}
-              <div className="mb-20 relative border border-gray-300">
+              <div className="mb-20 relative border border-gray-100">
                  {/* Vertical Center Line */}
                <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gray-200 -translate-x-px"></div>
                 {/* Horizontal Center Line */}
@@ -135,8 +170,8 @@ export default function Dashboard() {
 
 
                 {/* Top Row */}
-                <div className="grid grid-cols-2 text-center font-semibold">
-                  <div className="p-6 border-b border-r border-gray-300 ">
+                <div className="grid grid-cols-2 text-center font-semibold mt-3">
+                  <div className="p-6 border-b border-r border-gray-100">
                     <Metric label="Total Spending" value="₦213,660.90" />
                   </div>
                   <div className="p-6 border-b border-gray-300">
@@ -145,8 +180,8 @@ export default function Dashboard() {
                 </div>
 
                 {/* Bottom Row */}
-                <div className="grid grid-cols-2 text-center font-semibold">
-                  <div className="p-6 border-r border-gray-300">
+                <div className="grid grid-cols-2 text-center font-semibold mb-3">
+                  <div className="p-6 border-r border-gray-100">
                     <Metric label="Number of Sales" value="4,923" />
                   </div>
                   <div className="p-6">
@@ -157,7 +192,7 @@ export default function Dashboard() {
 
               {/* Cash Inflow Chart */}
               <div className="mb-10 px-6">
-                <h4 className="font-semibold mb-17 text-gray-900 text-lg">Cash Inflow</h4>
+                <h4 className="font-semibold mb-20 text-gray-900 text-lg">Cash Inflow</h4>
 
                 <div className="relative px-8">
                   {/* Y-axis labels */}
@@ -172,7 +207,7 @@ export default function Dashboard() {
                   </div>
 
                   {/* Chart info - positioned above the chart on the right */}
-                  <div className="absolute -top-18 right-28 border border-gray-100 rounded-lg bg-white p-3 shadow-sm">
+                  <div className="absolute -top-20 right-28 border border-gray-100 rounded-lg bg-white p-3 shadow-sm">
                     <div className="text-xs text-gray-700 mb-1">April 2021</div>
                     <div className="flex items-center gap-2 text-xs mb-1">
                       <span className="w-1.5 h-1.5 bg-gray-900 rounded-full"></span>
@@ -183,7 +218,7 @@ export default function Dashboard() {
 
                       <div className="ml-8 relative">
                       {/* Chart bars with varying heights */}
-                      <div className="flex items-end gap-1 h-40">
+                      <div className="flex items-end gap-2 h-40">
                         {[1200, 900, 1100, 850, 1300, 950, 1400, 1050, 1500, 1200, 1600, 1350, 1700, 1550, 1800, 1650, 1900, 1750, 2000, 2100].map((val, i) => (
                           <div
                             key={i}
@@ -196,27 +231,28 @@ export default function Dashboard() {
                       </div>
 
                       {/* Trend line - positioned above bars without touching them */}
-                      <svg className="absolute inset-0 w-full h-full pointer-events-none">
+                      <svg className="absolute inset-0 w-full h-full pointer-events-none mt-3">
                         <polyline
                           fill="none"
                           stroke="#4B5563"
-                          strokeWidth="1.5"
+                          strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           points="
-                            15,120 35,110 55,115 75,105 95,90 115,95 135,80 155,70
-                            175,55 195,60 215,45 235,35 255,25 275,30 295,20 315,15
-                            335,10 355,15 375,5 395,0
+                             15,80  35,70  55,75  75,65  95,50
+                            115,55 135,40 155,30 175,15 195,20
+                            215,5  235,0  255,5  275,10 295,0
+                            315,0  335,0  350,5  375,0  395,0
                           "
                         />
                         {/* Circle positioned at the middle of trend line */}
                         <circle
-                          cx="210"
-                          cy="50"
+                          cx="150"
+                          cy="32"
                           r="4"
                           fill="#FFFFFF"
                           stroke="#000"
-                          strokeWidth="1.5"
+                          strokeWidth="2"
                         />
                       </svg>
                     </div>
@@ -347,7 +383,7 @@ function Metric({ label, value }: MetricProps) {
   return (
     <div>
       <div className="text-sm text-gray-500 mb-1">{label}</div>
-      <div className="text-xl font-bold text-gray-800">{value}</div>
+      <div className="text-2xl font-bold text-gray-800">{value}</div>
     </div>
   );
 }

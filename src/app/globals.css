@@ -7,38 +7,3 @@
 body {
   font-family: var(--font-roboto-mono);
 }
-
-@media (max-width: 768px) {
-  aside {
-    width: 100% !important;
-    position: static !important;
-    border-right: none !important;
-    border-bottom: 1px solid #e5e7eb !important; /* gray-200 */
-    padding: 1rem !important;
-  }
-  main {
-    padding: 1rem !important;
-  }
-  .flex.gap-12 {
-    flex-direction: column !important;
-    gap: 2rem !important;
-  }
-  .w-1\/2 {
-    width: 100% !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-  .px-14 {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-}
-
-@media (max-width: 480px) {
-  aside {
-    display: none !important;
-  }
-  main {
-    padding: 0.5rem !important;
-  }
-}
