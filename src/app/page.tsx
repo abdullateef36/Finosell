@@ -1,417 +1,434 @@
-"use client";
+'use client';
+import React, { useState } from 'react';
+import Image from 'next/image';
 
-import { useState, useEffect } from 'react';
-import {
-  FiHome,
-  FiDollarSign,
-  FiPieChart,
-  FiCreditCard,
-  FiUser,
-  FiHelpCircle,
-  FiGift,
-  FiLogOut,
-  FiPlus,
-  FiArrowUpRight,
-  FiCopy,
-  FiCheck,
-  FiMenu
-} from 'react-icons/fi';
-import {
-  HiOutlineShoppingBag,
-  HiOutlineUsers,
-  HiOutlinePaperAirplane
-} from 'react-icons/hi';
-import { IoIosArrowDown } from "react-icons/io";
-
-export default function Dashboard() {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const mobile = window.innerWidth < 768;
-      setIsMobile(mobile);
-      if (mobile) {
-        setSidebarOpen(true);
-      }
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  return (
-    <div className="flex min-h-screen font-sans text-gray-300 bg-gray-100">
-      {/* Sidebar - Always visible on mobile */}
-      <aside className={`${
-        sidebarOpen ? (isMobile ? 'w-20 p-12' : 'w-64 p-6') : 'w-0 p-0'
-      } bg-white relative transition-all duration-300 ease-in-out overflow-hidden border-r`}>
-        <div className={`flex items-center justify-between mb-10 ${
-          (!sidebarOpen && !isMobile) ? 'hidden' : ''
-        }`}>
-          <div className="flex items-center gap-3 mt-4">
-            <div className="w-8 h-8 bg-yellow-600 rounded flex items-center justify-center -mr-1">
-              <HiOutlineShoppingBag className="text-white text-sm" />
-            </div>
-            {!isMobile && (
-              <div className="font-semibold text-gray-700 flex items-center gap-2">
-                Hello Oreofe
-                {!isMobile && (
-                  <button
-                    onClick={() => setSidebarOpen(false)}
-                    className="text-gray-500 hover:text-gray-700 transition-colors"
-                  >
-                    <IoIosArrowDown className="text-base" />
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {(sidebarOpen || isMobile) && (
-          <>
-            <nav className="flex flex-col gap-1 text-gray-600 mr-8">
-              <SidebarItem icon={<FiHome />} label="Home" active isMobile={isMobile} />
-              <SidebarItem icon={<FiDollarSign />} label="Finance" isMobile={isMobile} />
-              <SidebarItem icon={<FiPieChart />} label="Budget" isMobile={isMobile} />
-              <SidebarItem icon={<FiCreditCard />} label="Expense" isMobile={isMobile} />
-              <SidebarItem icon={<FiUser />} label="Account" isMobile={isMobile} />
-              <SidebarItem icon={<HiOutlinePaperAirplane />} label="Travels" isMobile={isMobile} />
-              <SidebarItem icon={<HiOutlineUsers />} label="Payroll" isMobile={isMobile} />
-              <SidebarItem icon={<FiHelpCircle />} label="Help" isMobile={isMobile} />
-              <SidebarItem icon={<FiGift />} label="Refer & Reward" isMobile={isMobile} />
-              <SidebarItem icon={<FiLogOut />} label="Logout" isMobile={isMobile} />
-            </nav>
-            {!isMobile && (
-              <div className="absolute bottom-6 left-6 flex items-center gap-2">
-                <div className="w-6 h-6 bg-gray-800 rounded flex items-center justify-center">
-                  <span className="text-white font-bold text-xs">f</span>
-                </div>
-                <span className="text-sm text-gray-600 font-medium">finosell.</span>
-              </div>
-            )}
-          </>
-        )}
-      </aside>
-
-
-      {/* Main Content */}
-      <main className="flex-1 p-8 relative">
-        {/* Hamburger menu (☰) - visible when sidebar is closed */}
-        {!sidebarOpen && (
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className="absolute left-4 top-4 text-gray-500 hover:text-gray-700 transition-colors z-10"
-          >
-            <FiMenu className="text-2xl mt-6" />
-          </button>
-        )}
-
-        <div className="flex gap-12">
-          {/* Left Column - Balance and Account Info */}
-          <div className="w-1/2 px-14">
-            {/* Top Balance Section */}
-            <div className="mb-8">
-              <div className="flex gap-6 mb-6">
-                <button className="px-4 py-2 bg-yellow-600 text-white font-medium shadow hover:bg-yellow-700 transition-colors rounded-tr-lg rounded-br-lg rounded-bl-lg">
-                  Total Balance
-                </button>
-                <button className="px-4 py-2 text-gray-900 font-medium">
-                  Wallet Balance
-                </button>
-              </div>
-
-              <div className="mb-8">
-                <div className="text-5xl font-bold text-gray-800 mb-2">
-                  ₦361,074<span className="text-gray-400 text-3xl">.76</span>
-                </div>
-              </div>
-
-              {/* Account Cards */}
-              <div className="space-y-6 mb-10">
-                <AccountCard type="Main Account" />
-                <AccountCard type="Sub Account" />
-              </div>
-
-              {/* Action Buttons */}
-              <div className="space-y-4">
-                <ActionButton
-                  icon={<FiPlus />}
-                  title="Add Money"
-                  subtitle="Space for subtitle text"
-                  bgColor="bg-yellow-50"
-                  iconColor="bg-yellow-600"
-                />
-                <ActionButton
-                  icon={<FiArrowUpRight />}
-                  title="Send Money"
-                  subtitle="Space for subtitle text"
-                  bgColor="bg-yellow-50"
-                  iconColor="bg-yellow-600"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column - Store Metrics */}
-          <div className="w-1/2">
-            {/* Store Metrics Header - Outside the card */}
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-semibold text-gray-900">Store Metrics</h3>
-              <div className="flex gap-4 text-xs ml-auto">
-                <button className="flex items-center gap-1.5 text-yellow-700 font-medium">
-                  <div className="w-3 h-3 bg-yellow-600 rounded-full flex items-center justify-center">
-                    <FiCheck className="text-white text-xs" />
-                  </div>
-                  Today
-                </button>
-                <button className="flex items-center gap-1.5 text-gray-500">
-                  <div className="w-3 h-3 border border-gray-300 rounded-full"></div>
-                  This Month
-                </button>
-                <button className="flex items-center gap-1.5 text-gray-500">
-                  <div className="w-3 h-3 border border-gray-300 rounded-full"></div>
-                  This Year
-                </button>
-                <button className="flex items-center gap-1.5 text-gray-500">
-                  <div className="w-3 h-3 border border-gray-300 rounded-full"></div>
-                  All
-                </button>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100">
-              {/* Metrics Grid with crossing borders */}
-              <div className="mb-20 relative border border-gray-100">
-                 {/* Vertical Center Line */}
-               <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gray-200 -translate-x-px"></div>
-                {/* Horizontal Center Line */}
-               <div className="absolute left-0 right-0 top-1/2 h-px bg-gray-200 -translate-y-px"></div>
-
-
-                {/* Top Row */}
-                <div className="grid grid-cols-2 text-center font-semibold mt-3">
-                  <div className="p-6 border-b border-r border-gray-100">
-                    <Metric label="Total Spending" value="₦213,660.90" />
-                  </div>
-                  <div className="p-6 border-b border-gray-300">
-                    <Metric label="Total Sales" value="₦198,231.01" />
-                  </div>
-                </div>
-
-                {/* Bottom Row */}
-                <div className="grid grid-cols-2 text-center font-semibold mb-3">
-                  <div className="p-6 border-r border-gray-100">
-                    <Metric label="Number of Sales" value="4,923" />
-                  </div>
-                  <div className="p-6">
-                    <Metric label="Product Impressions" value="1,340,239" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Cash Inflow Chart */}
-              <div className="mb-10 px-6">
-                <h4 className="font-semibold mb-20 text-gray-900 text-lg">Cash Inflow</h4>
-
-                <div className="relative px-8">
-                  {/* Y-axis labels */}
-                  <div className="absolute left-7 -top-14 h-64 flex flex-col justify-between text-xs text-gray-400 py-2">
-                    <span>3000</span>
-                    <span>2500</span>
-                    <span>2000</span>
-                    <span>1500</span>
-                    <span>1000</span>
-                    <span>500</span>
-                    <span>0</span>
-                  </div>
-
-                  {/* Chart info - positioned above the chart on the right */}
-                  <div className="absolute -top-20 right-28 border border-gray-100 rounded-lg bg-white p-3 shadow-sm">
-                    <div className="text-xs text-gray-700 mb-1">April 2021</div>
-                    <div className="flex items-center gap-2 text-xs mb-1">
-                      <span className="w-1.5 h-1.5 bg-gray-900 rounded-full"></span>
-                      <span className="text-gray-900 font-bold">Cash Inflow</span>
-                    </div>
-                    <div className="font-semibold text-gray-900 text-xs font-bold">$230,171.90</div>
-                  </div>
-
-                      <div className="ml-8 relative">
-                      {/* Chart bars with varying heights */}
-                      <div className="flex items-end gap-2 h-40">
-                        {[1200, 900, 1100, 850, 1300, 950, 1400, 1050, 1500, 1200, 1600, 1350, 1700, 1550, 1800, 1650, 1900, 1750, 2000, 2100].map((val, i) => (
-                          <div
-                            key={i}
-                            className="bg-yellow-600 rounded-t-sm flex-1 min-w-0"
-                            style={{
-                              height: `${((val - (i % 3 * 100)) / 2500) * 100}%`
-                            }}
-                          />
-                        ))}
-                      </div>
-
-                      {/* Trend line - positioned above bars without touching them */}
-                      <svg className="absolute inset-0 w-full h-full pointer-events-none mt-3">
-                        <polyline
-                          fill="none"
-                          stroke="#4B5563"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          points="
-                             15,80  35,70  55,75  75,65  95,50
-                            115,55 135,40 155,30 175,15 195,20
-                            215,5  235,0  255,5  275,10 295,0
-                            315,0  335,0  350,5  375,0  395,0
-                          "
-                        />
-                        {/* Circle positioned at the middle of trend line */}
-                        <circle
-                          cx="150"
-                          cy="32"
-                          r="4"
-                          fill="#FFFFFF"
-                          stroke="#000"
-                          strokeWidth="2"
-                        />
-                      </svg>
-                    </div>
-
-                  {/* X-axis labels */}
-                  <div className="flex justify-between text-xs text-gray-500 mt-4 ml-8">
-                    <span>Jan</span>
-                    <span>Dec</span>
-                    <span>Jul</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Best Selling Products */}
-              <div>
-                <h4 className="font-semibold mb-6 text-gray-900 text-lg ml-10">Best Selling Products</h4>
-                <div className="flex items-end justify-center gap-4 h-52">
-                  {[
-                    { value: 97, label: '97' },
-                    { value: 113, label: '113' },
-                    { value: 215, label: '215' },
-                    { value: 173, label: '173' },
-                    { value: 140, label: '140' }
-                  ].map((item, i) => (
-                    <div key={i} className="text-center relative">
-                      <div
-                        className="w-16 bg-yellow-600 mx-auto rounded-tr-2xl relative flex items-start justify-center pt-3"
-                        style={{ height: `${(item.value / 215) * 160}px` }}
-                      >
-                        <span className="text-sm font-semibold text-white">
-                          {item.label}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
-  );
+// --- TYPE DEFINITIONS ---
+// Defines the types for props to avoid 'any' type errors.
+interface PageProps {
+  setPage: (page: string) => void;
 }
 
-type SidebarItemProps = {
-  icon: React.ReactNode;
-  label: string;
-  active?: boolean;
-  isMobile: boolean;
-};
+interface HeaderProps extends PageProps {
+  page: string;
+}
 
-function SidebarItem({ icon, label, active = false, isMobile }: SidebarItemProps) {
+interface NavLinkProps {
+  children: React.ReactNode;
+  pageName: string;
+  setPage: (page: string) => void;
+  page: string;
+}
+
+interface IconProps {
+    className?: string;
+}
+
+
+// --- ICONS (Heroicons - MIT License) ---
+// Using inline SVGs for simplicity and to avoid external dependencies.
+const MenuIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+  </svg>
+);
+
+const XIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+  </svg>
+);
+
+const CheckCircleIcon: React.FC<IconProps> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+);
+
+const GlobeIcon: React.FC<IconProps> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h10a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.737 16.95l.001-.001M16.263 16.95l.001-.001M12 21a9 9 0 100-18 9 9 0 000 18z" />
+    </svg>
+);
+
+const CodeBracketIcon: React.FC<IconProps> = ({ className }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+    </svg>
+);
+
+// --- COMPONENTS ---
+
+// Header Component
+const Header: React.FC<HeaderProps> = ({ setPage, page }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navLinks = ["Home", "Solutions", "Developers", "Contact"];
+
+  const NavLink: React.FC<NavLinkProps> = ({ children, pageName, setPage, page }) => (
+    <button 
+      onClick={() => { setPage(pageName); setIsMenuOpen(false); }}
+      className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300 ${
+        page === pageName 
+        ? 'text-white bg-[#D6AA1B]' 
+        : 'text-[#273B4A] hover:bg-gray-100'
+      }`}
+    >
+      {children}
+    </button>
+  );
+
   return (
-    <div className={`flex items-center gap-3 px-3 py-2 rounded cursor-pointer transition-colors ${
-      active
-        ? 'text-gray-800 bg-gray-50 font-medium'
-        : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
-    }`}>
-      <span className="text-lg">{icon}</span>
-      {!isMobile && <span>{label}</span>}
-      {isMobile && (
-        <div className="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity">
-          {label}
+    <header className="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex-shrink-0 flex items-center">
+            <button onClick={() => setPage('Home')} className="flex items-center space-x-2">
+               <Image src="/Ficon.png" alt="Finosell Logo" width={32} height={32} />
+               <span className="text-2xl font-bold text-[#273B4A]">Finosell</span>
+            </button>
+          </div>
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-4">
+              {navLinks.map(name => <NavLink key={name} pageName={name} setPage={setPage} page={page}>{name}</NavLink>)}
+            </div>
+          </div>
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#D6AA1B]"
+            >
+              {isMenuOpen ? <XIcon /> : <MenuIcon />}
+            </button>
+          </div>
+        </div>
+      </div>
+      {isMenuOpen && (
+        <div className="md:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {navLinks.map(name => <NavLink key={name} pageName={name} setPage={setPage} page={page}>{name}</NavLink>)}
+          </div>
         </div>
       )}
-    </div>
+    </header>
   );
-}
-
-type AccountCardProps = {
-  type: string;
 };
 
-function AccountCard({ type }: AccountCardProps) {
-  return (
-    <div className="bg-white rounded-lg border border-yellow-200 overflow-hidden">
-      <div className="px-4 py-3 bg-gray-50">
-        <div className="text-sm font-medium text-gray-700">{type}</div>
-      </div>
-      <div className="p-4 space-y-3">
-        <div className="flex justify-between items-center py-1">
-          <span className="text-sm text-gray-500">Account Number</span>
-          <span className="text-sm font-semibold text-gray-900">0123456789</span>
-        </div>
-        <div className="flex justify-between items-center py-1">
-          <span className="text-sm text-gray-500">Account Name</span>
-          <span className="text-sm font-semibold text-gray-900">Oreofe Ventures</span>
-        </div>
-        <div className="flex justify-between items-center py-1">
-          <span className="text-sm text-gray-500">Bank</span>
-          <span className="text-sm font-semibold text-gray-900">Polaris Bank</span>
-        </div>
-      </div>
-      <button className="w-full flex items-center justify-center gap-2 text-sm text-white bg-gray-800 px-4 py-3 hover:bg-gray-700 transition-colors">
-        <span>Copy Account Number</span>
-        <FiCopy className="text-xs" />
-      </button>
-    </div>
-  );
-}
-
-type ActionButtonProps = {
-  icon: React.ReactNode;
-  title: string;
-  subtitle: string;
-  bgColor: string;
-  iconColor: string;
-};
-
-function ActionButton({ icon, title, subtitle, bgColor, iconColor }: ActionButtonProps) {
-  return (
-    <div className={`${bgColor} rounded-lg p-4 cursor-pointer hover:shadow-sm border border-gray-300
-    transition-shadow`}>
-      <div className="flex items-center gap-3">
-        <div className={`w-10 h-10 ${iconColor} rounded-lg flex items-center justify-center text-white font-bold`}>
-          {icon}
+// Footer Component
+const Footer: React.FC<PageProps> = ({ setPage }) => (
+  <footer className="bg-[#273B4A] text-white">
+    <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 className="text-2xl font-bold text-[#D6AA1B]">Finosell</h3>
+          <p className="mt-2 text-gray-400 text-sm">Simplifying how businesses manage money.</p>
         </div>
         <div>
-          <div className="font-medium text-gray-800">{title}</div>
-          <div className="text-sm text-gray-500">{subtitle}</div>
+          <h4 className="text-sm font-semibold tracking-wider uppercase text-gray-400">Solutions</h4>
+          <ul className="mt-4 space-y-2">
+            <li><button onClick={() => setPage('Solutions')} className="text-base text-gray-300 hover:text-white">Smart Accounting</button></li>
+            <li><button onClick={() => setPage('Solutions')} className="text-base text-gray-300 hover:text-white">Card Issuing</button></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="text-sm font-semibold tracking-wider uppercase text-gray-400">Company</h4>
+          <ul className="mt-4 space-y-2">
+            <li><button onClick={() => setPage('Home')} className="text-base text-gray-300 hover:text-white">About Us</button></li>
+            <li><button onClick={() => setPage('Developers')} className="text-base text-gray-300 hover:text-white">Developers</button></li>
+            <li><button onClick={() => setPage('Contact')} className="text-base text-gray-300 hover:text-white">Contact</button></li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="text-sm font-semibold tracking-wider uppercase text-gray-400">Contact</h4>
+          <ul className="mt-4 space-y-2">
+            <li className="text-base text-gray-300">Email: info@finosell.com</li>
+            <li className="text-base text-gray-300">Website: www.finosell.com</li>
+            <li className="text-base text-gray-300">Support: Telegram Channel</li>
+          </ul>
         </div>
       </div>
+      <div className="mt-8 border-t border-gray-700 pt-8 text-center text-base text-gray-400">
+        <p>&copy; {new Date().getFullYear()} Finosell. All rights reserved.</p>
+      </div>
     </div>
-  );
-}
+  </footer>
+);
 
-type MetricProps = {
-  label: string;
-  value: string;
+// --- PAGES ---
+
+// Home Page Component
+const HomePage: React.FC<PageProps> = ({ setPage }) => (
+  <div>
+    {/* Hero Section */}
+    <div className="bg-gray-50">
+        <div className="max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-4xl font-extrabold tracking-tight text-[#273B4A] sm:text-5xl md:text-6xl">
+                <span className="block">Modern Finance Solutions</span>
+                <span className="block text-[#D6AA1B]">for Ambitious Businesses</span>
+            </h1>
+            <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-600">
+                Finosell empowers startups and SMEs with smart, embedded banking and accounting. We simplify complex financial processes, helping you operate efficiently and grow with confidence.
+            </p>
+            <div className="mt-8 flex justify-center space-x-4">
+                <button onClick={() => setPage('Solutions')} className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#D6AA1B] hover:bg-[#b58f16]">
+                    Explore Solutions
+                </button>
+                <button onClick={() => setPage('Developers')} className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-[#D6AA1B] bg-white hover:bg-gray-100">
+                    View API Docs
+                </button>
+            </div>
+        </div>
+    </div>
+
+    {/* Features Section */}
+    <div className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+                <h2 className="text-base text-[#D6AA1B] font-semibold tracking-wide uppercase">Our Platform</h2>
+                <p className="mt-2 text-3xl font-extrabold text-[#273B4A] tracking-tight sm:text-4xl">
+                    Everything you need to manage your finances
+                </p>
+            </div>
+            <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="pt-6">
+                    <div className="flow-root bg-gray-50 rounded-lg px-6 pb-8">
+                        <div className="-mt-6">
+                            <div>
+                                <span className="inline-flex items-center justify-center p-3 bg-[#D6AA1B] rounded-md shadow-lg">
+                                    <CheckCircleIcon className="h-6 w-6 text-white" />
+                                </span>
+                            </div>
+                            <h3 className="mt-8 text-lg font-medium text-[#273B4A] tracking-tight">Automated Accounting</h3>
+                            <p className="mt-5 text-base text-gray-500">
+                                Eliminate manual data entry with automated income, expense tracking, and real-time profit analysis.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div className="pt-6">
+                    <div className="flow-root bg-gray-50 rounded-lg px-6 pb-8">
+                        <div className="-mt-6">
+                            <div>
+                                <span className="inline-flex items-center justify-center p-3 bg-[#D6AA1B] rounded-md shadow-lg">
+                                    <GlobeIcon className="h-6 w-6 text-white" />
+                                </span>
+                            </div>
+                            <h3 className="mt-8 text-lg font-medium text-[#273B4A] tracking-tight">Global Card Issuing</h3>
+                            <p className="mt-5 text-base text-gray-500">
+                                Issue virtual USD &amp; Naira cards on Visa and Mastercard networks, accepted at over 37 million merchants worldwide.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div className="pt-6">
+                    <div className="flow-root bg-gray-50 rounded-lg px-6 pb-8">
+                        <div className="-mt-6">
+                            <div>
+                                <span className="inline-flex items-center justify-center p-3 bg-[#D6AA1B] rounded-md shadow-lg">
+                                    <CodeBracketIcon className="h-6 w-6 text-white" />
+                                </span>
+                            </div>
+                            <h3 className="mt-8 text-lg font-medium text-[#273B4A] tracking-tight">Developer-Friendly API</h3>
+                            <p className="mt-5 text-base text-gray-500">
+                                Integrate our financial services into your own platform with a single, powerful API. Go live in under 5 days.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+);
+
+// Solutions Page Component
+const SolutionsPage = () => {
+    const accountingFeatures = [
+        "Automated Income and Expense Tracking",
+        "Real-Time Profit Analysis",
+        "Receipt Management System",
+        "Intelligent Transaction Categorization",
+        "Downloadable Financial Reporting",
+        "Multi-Account Reconciliation"
+    ];
+
+    const cardFeatures = [
+        "Globally Accepted (37M+ merchants)",
+        "Advanced 3D Secure Protection",
+        "Full PCI DSS & NDPR Compliance",
+        "Instant Freeze/Unfreeze and Limit Controls",
+        "Enriched, Categorized Transaction Data",
+        "Integrated Revenue Streams"
+    ];
+    
+    return (
+        <div className="bg-white">
+            <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+                <div className="text-center">
+                    <h2 className="text-base text-[#D6AA1B] font-semibold tracking-wide uppercase">Our Solutions</h2>
+                    <p className="mt-2 text-3xl font-extrabold text-[#273B4A] tracking-tight sm:text-4xl">
+                        Powerful Tools to Drive Your Business Forward
+                    </p>
+                    <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-600">
+                        From automated bookkeeping to global payments, Finosell provides the infrastructure you need to succeed.
+                    </p>
+                </div>
+
+                {/* Smart Accounting Section */}
+                <div className="mt-20">
+                    <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+                        <div>
+                            <h3 className="text-2xl font-extrabold text-[#273B4A] sm:text-3xl">Smart Accounting</h3>
+                            <p className="mt-3 text-lg text-gray-600">
+                                An automated financial management system designed to simplify bookkeeping and provide real-time insights. Eliminate manual data entry and maintain accurate financial records with minimal effort.
+                            </p>
+                            <dl className="mt-10 space-y-5">
+                                {accountingFeatures.map(feature => (
+                                    <div key={feature} className="relative">
+                                        <dt>
+                                            <CheckCircleIcon className="absolute h-6 w-6 text-green-500" />
+                                            <p className="ml-9 text-lg leading-6 font-medium text-[#273B4A]">{feature}</p>
+                                        </dt>
+                                    </div>
+                                ))}
+                            </dl>
+                        </div>
+                        <div className="mt-10 lg:mt-0" aria-hidden="true">
+                            <Image className="relative mx-auto rounded-lg shadow-xl" width={490} height={400} src="https://placehold.co/600x400/fefce8/D6AA1B?text=Accounting+Dashboard" alt="Accounting Dashboard" />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Card Issuing Section */}
+                <div className="mt-24">
+                    <div className="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+                        <div className="lg:order-2">
+                            <h3 className="text-2xl font-extrabold text-[#273B4A] sm:text-3xl">Virtual Card Issuing</h3>
+                            <p className="mt-3 text-lg text-gray-600">
+                                Issue multi-currency (USD &amp; Naira) virtual cards on the Visa and Mastercard networks. Perfect for paying for tools, subscriptions, or making cross-border purchases.
+                            </p>
+                            <dl className="mt-10 space-y-5">
+                                {cardFeatures.map(feature => (
+                                    <div key={feature} className="relative">
+                                        <dt>
+                                            <CheckCircleIcon className="absolute h-6 w-6 text-green-500" />
+                                            <p className="ml-9 text-lg leading-6 font-medium text-[#273B4A]">{feature}</p>
+                                        </dt>
+                                    </div>
+                                ))}
+                            </dl>
+                        </div>
+                        <div className="mt-10 lg:mt-0 lg:order-1" aria-hidden="true">
+                            <Image className="relative mx-auto rounded-lg shadow-xl" width={490} height={400} src="https://placehold.co/600x400/e2e8f0/273B4A?text=Virtual+Cards" alt="Virtual Cards" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 };
 
-function Metric({ label, value }: MetricProps) {
+// Developers Page Component
+const DevelopersPage = () => {
+    const apiFeatures = [
+        { name: 'High Throughput', description: 'Process over 500 transactions per second (TPS).', icon: CodeBracketIcon },
+        { name: 'Rapid Integration', description: 'Go live in under 5 days with a single, well-documented API.', icon: CodeBracketIcon },
+        { name: 'Real-Time Authorization', description: 'Set and enforce approval rules instantly as transactions happen.', icon: CodeBracketIcon },
+        { name: 'Full Lifecycle Management', description: 'Activate, freeze, replace, or terminate cards via API.', icon: CodeBracketIcon },
+        { name: 'Sandbox Environment', description: 'Access a complete sandbox for seamless testing and development.', icon: CodeBracketIcon },
+        { name: 'Global Network', description: 'Full integration with Visa and Mastercard networks for global reach.', icon: CodeBracketIcon },
+    ];
+    return (
+        <div className="bg-[#273B4A] py-16 sm:py-24">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center">
+                    <h2 className="text-base font-semibold text-[#D6AA1B] tracking-wide uppercase">For Developers</h2>
+                    <p className="mt-2 text-3xl font-extrabold text-white tracking-tight sm:text-4xl">
+                        Build on a Foundation of Financial Power
+                    </p>
+                    <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-300">
+                        Our robust infrastructure is built to support high-volume, real-time financial operations. Integrate with ease and scale with confidence.
+                    </p>
+                </div>
+                <div className="mt-16">
+                    <dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-12 lg:grid-cols-3">
+                        {apiFeatures.map((feature) => (
+                            <div key={feature.name} className="relative">
+                                <dt>
+                                    <div className="absolute flex items-center justify-center h-12 w-12 rounded-md bg-[#D6AA1B] text-white">
+                                        <feature.icon className="h-6 w-6" aria-hidden="true" />
+                                    </div>
+                                    <p className="ml-16 text-lg leading-6 font-medium text-white">{feature.name}</p>
+                                </dt>
+                                <dd className="mt-2 ml-16 text-base text-gray-400">{feature.description}</dd>
+                            </div>
+                        ))}
+                    </dl>
+                </div>
+                 <div className="mt-12 text-center">
+                    <a href="#" className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#D6AA1B] hover:bg-[#b58f16]">
+                        Read API Documentation
+                    </a>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+// Contact Page Component
+const ContactPage = () => (
+    <div className="bg-white py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-lg mx-auto">
+            <h2 className="text-3xl font-extrabold tracking-tight text-[#273B4A] sm:text-4xl text-center">Contact Us</h2>
+            <p className="mt-4 text-lg text-gray-600 text-center">
+                We&apos;re here to help. Reach out to us for support or inquiries.
+            </p>
+            <div className="mt-12 bg-gray-50 p-8 rounded-lg shadow-md">
+                <h3 className="text-lg font-medium text-[#273B4A]">Contact Information</h3>
+                <dl className="mt-2 text-base text-gray-600">
+                    <div className="mt-4">
+                        <dt className="font-medium text-[#273B4A]">Email</dt>
+                        <dd>info@finosell.com</dd>
+                    </div>
+                    <div className="mt-4">
+                        <dt className="font-medium text-[#273B4A]">Website</dt>
+                        <dd><a href="http://www.finosell.com" target="_blank" rel="noopener noreferrer" className="text-[#D6AA1B] hover:underline">www.finosell.com</a></dd>
+                    </div>
+                    <div className="mt-4">
+                        <dt className="font-medium text-[#273B4A]">Support</dt>
+                        <dd>We provide a dedicated Telegram channel for quick support to each company during business hours.</dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </div>
+);
+
+
+// Main App Component
+export default function App() {
+  const [page, setPage] = useState('Home');
+
+  const renderPage = () => {
+    switch (page) {
+      case 'Home':
+        return <HomePage setPage={setPage} />;
+      case 'Solutions':
+        return <SolutionsPage />;
+      case 'Developers':
+        return <DevelopersPage />;
+      case 'Contact':
+        return <ContactPage />;
+      default:
+        return <HomePage setPage={setPage} />;
+    }
+  };
+
   return (
-    <div>
-      <div className="text-sm text-gray-500 mb-1">{label}</div>
-      <div className="text-2xl font-bold text-gray-800">{value}</div>
+    <div className="bg-white font-sans">
+      <Header setPage={setPage} page={page} />
+      <main>
+        {renderPage()}
+      </main>
+      <Footer setPage={setPage} />
     </div>
   );
 }
