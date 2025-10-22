@@ -178,45 +178,76 @@ const HomePage: React.FC<PageProps> = ({ setPage }) => (
         </div>
     </div>
 
-    {/* Features Section */}
-    <div className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-                <h2 className="text-base text-[#D6AA1B] font-semibold tracking-wide uppercase">Our Platform</h2>
-                <p className="mt-2 text-3xl font-extrabold text-[#273B4A] tracking-tight sm:text-4xl">
-                    Everything you need to manage your finances
-                </p>
+              {/* Account Cards */}
+              <div className="space-y-6 mb-10">
+                <AccountCard type="Main Account" />
+                <AccountCard type="Sub Account" />
+              </div>
+
+              {/* Action Buttons */}
+              <div className="space-y-4">
+                <ActionButton
+                  icon={<FiPlus />}
+                  title="Add Money"
+                  subtitle="Space for subtitle text"
+                  bgColor="bg-yellow-50"
+                  iconColor="bg-yellow-600"
+                />
+                <ActionButton
+                  icon={<FiArrowUpRight />}
+                  title="Send Money"
+                  subtitle="Space for subtitle text"
+                  bgColor="bg-yellow-50"
+                  iconColor="bg-yellow-600"
+                />
+              </div>
             </div>
-            <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-                <div className="pt-6">
-                    <div className="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-                        <div className="-mt-6">
-                            <div>
-                                <span className="inline-flex items-center justify-center p-3 bg-[#D6AA1B] rounded-md shadow-lg">
-                                    <CheckCircleIcon className="h-6 w-6 text-white" />
-                                </span>
-                            </div>
-                            <h3 className="mt-8 text-lg font-medium text-[#273B4A] tracking-tight">Automated Accounting</h3>
-                            <p className="mt-5 text-base text-gray-500">
-                                Eliminate manual data entry with automated income, expense tracking, and real-time profit analysis.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div className="pt-6">
-                    <div className="flow-root bg-gray-50 rounded-lg px-6 pb-8">
-                        <div className="-mt-6">
-                            <div>
-                                <span className="inline-flex items-center justify-center p-3 bg-[#D6AA1B] rounded-md shadow-lg">
-                                    <GlobeIcon className="h-6 w-6 text-white" />
-                                </span>
-                            </div>
-                            <h3 className="mt-8 text-lg font-medium text-[#273B4A] tracking-tight">Global Card Issuing</h3>
-                            <p className="mt-5 text-base text-gray-500">
-                                Issue virtual USD &amp; Naira cards on Visa and Mastercard networks, accepted at over 37 million merchants worldwide.
-                            </p>
-                        </div>
-                    </div>
+          </div>
+
+          {/* Right Column - Store Metrics */}
+          <div className="w-1/2">
+            {/* Store Metrics Header - Outside the card */}
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-semibold text-gray-900">Store Metrics</h3>
+              <div className="flex gap-4 text-xs ml-auto">
+                <button className="flex items-center gap-1.5 text-yellow-700 font-medium">
+                  <div className="w-3 h-3 bg-yellow-600 rounded-full flex items-center justify-center">
+                    <FiCheck className="text-white text-xs" />
+                  </div>
+                  Today
+                </button>
+                <button className="flex items-center gap-1.5 text-gray-500">
+                  <div className="w-3 h-3 border border-gray-300 rounded-full"></div>
+                  This Month
+                </button>
+                <button className="flex items-center gap-1.5 text-gray-500">
+                  <div className="w-3 h-3 border border-gray-300 rounded-full"></div>
+                  This Year
+                </button>
+                <button className="flex items-center gap-1.5 text-gray-500">
+                  <div className="w-3 h-3 border border-gray-300 rounded-full"></div>
+                  All
+                </button>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100">
+              {/* Metrics Grid with crossing borders */}
+              <div className="mb-20 relative border border-gray-100">
+                 {/* Vertical Center Line */}
+               <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gray-200 -translate-x-px"></div>
+                {/* Horizontal Center Line */}
+               <div className="absolute left-0 right-0 top-1/2 h-px bg-gray-200 -translate-y-px"></div>
+
+
+                {/* Top Row */}
+                <div className="grid grid-cols-2 text-center font-semibold mt-3">
+                  <div className="p-6 border-b border-r border-gray-100">
+                    <Metric label="Total Spending" value="₦213,660.90" />
+                  </div>
+                  <div className="p-6 border-b border-gray-300">
+                    <Metric label="Total Sales" value="₦198,231.01" />
+                  </div>
                 </div>
                 <div className="pt-6">
                     <div className="flow-root bg-gray-50 rounded-lg px-6 pb-8">
@@ -429,6 +460,20 @@ export default function App() {
         {renderPage()}
       </main>
       <Footer setPage={setPage} />
+    </div>
+  );
+}
+
+type MetricProps = {
+  label: string;
+  value: string;
+};
+
+function Metric({ label, value }: MetricProps) {
+  return (
+    <div>
+      <div className="text-sm text-gray-500 mb-1">{label}</div>
+      <div className="text-2xl font-bold text-gray-800">{value}</div>
     </div>
   );
 }
