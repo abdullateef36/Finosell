@@ -219,6 +219,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+        
 
         {/* Other sections of your page will go here */}
       </main>
