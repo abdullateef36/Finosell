@@ -11,8 +11,8 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Finosell Dashboard",
-  description: "A modern financial dashboard interface",
+  title: "Finosell | Business Accounting Software & Financial Management Platform",
+  description: "Comprehensive financial management platform for businesses.",
 };
 
 export default function RootLayout({
