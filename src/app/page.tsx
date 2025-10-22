@@ -21,6 +21,43 @@ export default function HomePage() {
           </p>
         </section>
 
+        {/* Account Feature Section */}
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#FFFBF0] from-50% to-white to-50%"></div>
+          <div className="container mx-auto px-4 lg:px-8 py-20 lg:py-28 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              {/* Left Side - App Screenshot (Yellow Background, extending to edge) */}
+              <div className="relative lg:mr-auto lg:-ml-8 xl:-ml-16 order-2 lg:order-1">
+                <div className="relative z-10">
+                  <div className="rounded-r-2xl shadow-2xl overflow-hidden">
+                    <Image 
+                      src="/account.png" 
+                      alt="Account Management Dashboard" 
+                      width={700} 
+                      height={500}
+                      className="w-full h-auto"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Side - Text Content (White Background) */}
+              <div className="space-y-6 lg:pl-12 order-1 lg:order-2">
+                <h2 className="text-3xl lg:text-4xl font-bold text-[#273B4A] leading-tight">
+                  Account
+                </h2>
+                <p className="text-base lg:text-lg text-gray-600 leading-relaxed">
+                  Manage your financial accounts with comprehensive oversight and control. 
+                  View total balance across all sub-accounts, create and manage multiple bank accounts, 
+                  transfer money securely to any bank with automatic account verification. 
+                  Track categories and spending patterns, access financial insights with income and expense charts, 
+                  and process pending payment approvals with role-based access control for enhanced security.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Budget Feature Section */}
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-white from-50% to-[#FFFBF0] to-50%"></div>
