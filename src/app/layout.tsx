@@ -1,13 +1,13 @@
 // app/layout.tsx
 
 import type { Metadata } from "next";
-import { Roboto_Mono } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import "./globals.css";
 
-// Load Roboto Mono font
-const robotoMono = Roboto_Mono({
+// Load Open Sans font
+const openSans = Open_Sans({
   subsets: ["latin"],
-  variable: "--font-roboto-mono",
+  variable: "--font-open-sans",
 });
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${robotoMono.variable} font-mono antialiased`}>
+      <body className={`${openSans.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>

@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --font-roboto-mono: 'Roboto Mono', monospace;
+  --font-open-sans: 'Open Sans', sans-serif;
 }
 
 body {
-  font-family: var(--font-roboto-mono);
+  font-family: var(--font-open-sans);
 }
