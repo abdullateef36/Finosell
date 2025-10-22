@@ -154,7 +154,7 @@ export default function HomePage() {
                 <div className="relative z-10">
                   <div className="rounded-l-2xl shadow-2xl overflow-hidden">
                     <Image 
-                      src="/payroll.jpg" 
+                      src="/payroll.png" 
                       alt="Payroll Management Dashboard" 
                       width={700} 
                       height={500}
@@ -219,7 +219,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        
+
 
         {/* Other sections of your page will go here */}
       </main>
