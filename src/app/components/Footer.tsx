@@ -58,7 +58,7 @@ const Footer = () => {
             <ul className="space-y-3.5">
               <FooterLink href="#">About</FooterLink>
               <FooterLink href="#">Blog</FooterLink>
-              <FooterLink href="/faq">FAQ</FooterLink>
+              <FooterLink href="#">FAQ</FooterLink>
               <FooterLink href="#">Help</FooterLink>
               <FooterLink href="#">Handles</FooterLink>
             </ul>
@@ -70,7 +70,7 @@ const Footer = () => {
             <ul className="space-y-3.5">
               <FooterLink href="#">Business Management</FooterLink>
               <FooterLink href="#">Payments</FooterLink>
-              <FooterLink href="#">Escrow</FooterLink>
+              {/* <FooterLink href="#">Escrow</FooterLink> */}
             </ul>
           </div>
 
@@ -79,7 +79,7 @@ const Footer = () => {
             <h3 className="font-semibold text-gray-900 mb-5 text-[15px]">Legal</h3>
             <ul className="space-y-3.5">
               <FooterLink href="#">Terms and Conditions</FooterLink>
-              <FooterLink href="#">Privacy policy</FooterLink>
+              <FooterLink href="/privacy-policy">Privacy policy</FooterLink>
             </ul>
           </div>
         </div>
