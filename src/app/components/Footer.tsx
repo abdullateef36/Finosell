@@ -1,7 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaGooglePlay, FaApple } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaGooglePlay, FaApple, FaYoutube } from 'react-icons/fa';
+import { FaXTwitter } from "react-icons/fa6";
 import { HiDesktopComputer } from 'react-icons/hi';
 
 // A reusable component for footer links
@@ -104,32 +105,49 @@ const Footer = () => {
             {/* Social Icons */}
             <div className="flex items-center gap-4">
               <a 
-                href="#" 
-                aria-label="Facebook" 
+                href="https://www.facebook.com/profile.php?id=100063642578492&mibextid=rS40aB7S9Ucbxw6v" 
+                aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer" 
                 className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-gray-200 hover:text-[#273B4A] transition-colors"
               >
                 <FaFacebookF size={14} />
               </a>
               <a 
-                href="#" 
-                aria-label="Instagram" 
+                href="https://www.instagram.com/finosellapp?igsh=MWV1aHI1Nzk3bDRzMQ==" 
+                aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer" 
                 className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-gray-200 hover:text-[#273B4A] transition-colors"
               >
                 <FaInstagram size={14} />
               </a>
               <a 
-                href="#" 
-                aria-label="LinkedIn" 
+                href="https://www.linkedin.com/company/finosell-global-ltd/posts/?feedView=all" 
+                aria-label="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"  
                 className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-gray-200 hover:text-[#273B4A] transition-colors"
               >
                 <FaLinkedinIn size={14} />
               </a>
               <a 
-                href="#" 
-                aria-label="Twitter" 
+                href="https://x.com/finosell?s=11" 
+                aria-label="Twitter"
+                target="_blank"
+                rel="noopener noreferrer"  
                 className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-gray-200 hover:text-[#273B4A] transition-colors"
               >
-                <FaTwitter size={14} />
+                <FaXTwitter size={14} />
+              </a>
+               <a 
+                href="https://youtube.com/@finosell?si=MH66mUp1Lb8-A4VC" 
+                aria-label="Youtube"
+                target="_blank"
+                rel="noopener noreferrer"  
+                className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:bg-gray-200 hover:text-[#273B4A] transition-colors"
+              >
+                <FaYoutube size={14} />
               </a>
             </div>
           </div>

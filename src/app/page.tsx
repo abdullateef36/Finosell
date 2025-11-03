@@ -220,6 +220,59 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Trusted Brands Section */}
+      <section className="bg-gradient-to-br from-[#273B4A] to-[#1a2935] py-24 lg:py-32">
+        <div className="container mx-auto px-6 lg:px-12">
+          {/* Section Header */}
+          <div className="text-center mb-20">
+            <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb-5 tracking-tight">
+              Brands that Trust & Work with Us
+            </h2>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              Join forward-thinking businesses that rely on Finosell to simplify and scale their financial operations.
+            </p>
+          </div>
+
+          {/* Brands Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+            {/* Brand 1: Ishop247 */}
+            <div className="group bg-white/95 backdrop-blur-sm rounded-3xl p-12 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 flex flex-col items-center justify-center">
+              <div className="mb-6 flex items-center justify-center">
+                <div className="relative">
+                  <Image 
+                    src="/ishop247-logo.jpg" 
+                    alt="Ishop247 Logo" 
+                    width={350} 
+                    height={160}
+                    className="w-auto h-28 md:h-36 object-contain transition-transform duration-300 group-hover:scale-110"
+                  />
+                </div>
+              </div>
+              <div className="pt-4 border-t border-gray-100">
+                <h3 className="text-xl font-semibold text-gray-800">Ishop247</h3>
+              </div>
+            </div>
+
+            {/* Brand 2: Emeranda Global Investment */}
+            <div className="group bg-white/95 backdrop-blur-sm rounded-3xl p-12 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 hover:scale-105 flex flex-col items-center justify-center">
+              <div className="mb-6 flex items-center justify-center">
+                <div className="relative">
+                  <Image 
+                    src="/emeranda-logo.jpg" 
+                    alt="Emeranda Global Investment Logo" 
+                    width={400} 
+                    height={160}
+                    className="w-auto h-28 md:h-36 object-contain transition-transform duration-300 group-hover:scale-110"
+                  />
+                </div>
+              </div>
+              <div className="pt-4 border-t border-gray-100">
+                <h3 className="text-xl font-semibold text-gray-800">Emeranda Global Investment</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
         {/* Other sections of your page will go here */}
       </main>
