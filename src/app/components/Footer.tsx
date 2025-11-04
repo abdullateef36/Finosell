@@ -60,7 +60,7 @@ const Footer = () => {
               <FooterLink href="#">About</FooterLink>
               <FooterLink href="#">Blog</FooterLink>
               <FooterLink href="#">FAQ</FooterLink>
-              <FooterLink href="#">Help</FooterLink>
+              {/* <FooterLink href="/document-upload">Document Upload</FooterLink> */}
             </ul>
           </div>
 
@@ -70,7 +70,6 @@ const Footer = () => {
             <ul className="space-y-3.5">
               <FooterLink href="#">Business Management</FooterLink>
               <FooterLink href="#">Payments</FooterLink>
-              {/* <FooterLink href="#">Escrow</FooterLink> */}
             </ul>
           </div>
 
