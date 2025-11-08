@@ -271,28 +271,36 @@ export default function HomePage() {
                 Join companies streamlining their finances with Finosell
               </h2>
             </div>
-            <div className="flex flex-wrap items-center justify-center gap-16 lg:gap-24 max-w-5xl mx-auto">
-              <div className="flex flex-col items-center gap-3 hover:scale-105 transition-transform duration-300">
-                <Image 
-                  src="/ishop247-logo.jpg" 
-                  alt="Ishop247 Logo" 
-                  width={180} 
-                  height={80}
-                  className="w-auto h-16 md:h-20 object-contain"
-                />
-                <p className="text-sm font-medium text-gray-700">Ishop247</p>
-              </div>
-              <div className="flex flex-col items-center gap-3 hover:scale-105 transition-transform duration-300">
-                <Image 
-                  src="/emeranda-logo.jpg" 
-                  alt="Emeranda Global Investment Logo" 
-                  width={180} 
-                  height={80}
-                  className="w-auto h-16 md:h-20 object-contain"
-                />
-                <p className="text-sm font-medium text-gray-700">Emeranda Global Investment</p>
-              </div>
-            </div>
+            <div className="flex flex-wrap items-center justify-center gap-12 lg:gap-20 max-w-5xl mx-auto py-10">
+  {/* Ishop247 */}
+  <div className="flex flex-col items-center gap-4 hover:scale-105 transition-all duration-300">
+    <div className="bg-white rounded-full shadow-md p-6 flex items-center justify-center w-32 h-32 md:w-36 md:h-36 border border-gray-100">
+      <Image 
+        src="/ishop247-logo.jpg" 
+        alt="Ishop247 Logo" 
+        width={120} 
+        height={120}
+        className="object-contain rounded-full"
+      />
+    </div>
+    <p className="text-lg font-bold text-gray-800 tracking-wide">Ishop247</p>
+  </div>
+
+  {/* Emeranda Global Investment */}
+  <div className="flex flex-col items-center gap-4 hover:scale-105 transition-all duration-300">
+    <div className="bg-white rounded-full shadow-md p-6 flex items-center justify-center w-32 h-32 md:w-36 md:h-36 border border-gray-100">
+      <Image 
+        src="/emeranda-logo.jpg" 
+        alt="Emeranda Global Investment Logo" 
+        width={120} 
+        height={120}
+        className="object-contain rounded-full"
+      />
+    </div>
+    <p className="text-lg font-bold text-gray-800 tracking-wide text-center">Emeranda Global Investment</p>
+  </div>
+</div>
+
           </div>
         </section>
       </main>

@@ -11,7 +11,7 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Finosell | Business Accounting Software & Financial Management Platform",
+  title: "Finosell || Modern Finance for a Borderless Business World",
   description: "Comprehensive financial management platform for businesses.",
 };
 
