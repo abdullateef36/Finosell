@@ -9,7 +9,7 @@ export default function HomePage() {
 
       <main>
         {/* Hero Section */}
-        <section className="container mx-auto flex flex-col items-center text-center px-4 py-24 lg:py-32">
+        <section className="container mx-auto flex flex-col items-center text-center px-4 py-24 lg:py-32 -mb-20">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#273B4A] max-w-4xl leading-tight">
             Modern Finance for a Borderless Business World
           </h1>
@@ -18,13 +18,10 @@ export default function HomePage() {
           </p>
         </section>
 
-        {/* NEW: How It Works Illustration Section */}
-        <section className="bg-gradient-to-b from-white to-[#FFFBF0] py-10 lg:py-18">
+        {/* Illustration Section */}
+         <section className="bg-gradient-to-b from-white to-[#FFFBF0] pt-0 pb-10 lg:pb-18">
           <div className="container mx-auto px-4 lg:px-12">
             <div className="flex flex-col items-center text-center">
-              <h2 className="text-3xl lg:text-4xl font-bold text-[#273B4A]">
-                Manage Your Finances with Ease
-              </h2>
               <div className="">
                 <Image
                   src="/illustration-dashboard.png"
