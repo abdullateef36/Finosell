@@ -1,11 +1,12 @@
-import Header from './components/Header'; 
-import Footer from './components/Footer'; 
+import Header from './components/Header';
+import Footer from './components/Footer';
 import Image from 'next/image';
 
 export default function HomePage() {
   return (
     <div className="bg-white font-sans text-gray-800">
       <Header />
+
       <main>
         {/* Hero Section */}
         <section className="container mx-auto flex flex-col items-center text-center px-4 py-24 lg:py-32">
@@ -15,6 +16,31 @@ export default function HomePage() {
           <p className="mt-6 text-lg text-[#8C8C8C] max-w-2xl">
             Simplify how you manage payroll, payments, and financial operations seamlessly anywhere.
           </p>
+        </section>
+
+        {/* NEW: How It Works Illustration Section */}
+        <section className="bg-gradient-to-b from-white to-[#FFFBF0] py-10 lg:py-18">
+          <div className="container mx-auto px-4 lg:px-12">
+            <div className="flex flex-col items-center text-center">
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#273B4A]">
+                Manage Your Finances with Ease
+              </h2>
+              <div className="">
+                <Image
+                  src="/illustration-dashboard.png"
+                  alt="Finosell Dashboard Illustration"
+                  width={500}
+                  height={300}
+                  className="w-full h-auto rounded-2xl shadow-xl"
+                  priority
+                />
+              </div>
+              <p className="mt-8 text-lg text-gray-600 max-w-2xl">
+                A clean, intuitive interface lets you handle payroll, invoicing, budgets, and team
+                collaboration — all from a single, powerful dashboard.
+              </p>
+            </div>
+          </div>
         </section>
 
         {/* Why You Need Finosell Section */}
@@ -27,13 +53,11 @@ export default function HomePage() {
                 </h2>
                 <div className="w-24 h-1 bg-[#DAB22F] mx-auto mb-8"></div>
               </div>
-
               <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 lg:p-12 border border-white/20 shadow-2xl">
                 <p className="text-lg lg:text-xl text-white/95 leading-relaxed text-center mb-12">
                   Save more time to focus on growing your business and scaling beyond borders.
-                  From gaining real-time insights into company spending to creating accurate invoices, managing payroll, building budgets, and tracking expenses — Finosell keeps your team organized and your numbers accurate.
+                  From gaining real-time insights into company spending to creating accurate invoices, managing payroll, building budgets, and tracking expenses — Finosell keeps your team organized and your numbers accurate.
                 </p>
-
                 {/* Feature Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                   {/* Feature 1: Payroll */}
@@ -118,20 +142,20 @@ export default function HomePage() {
                   Payroll
                 </h2>
                 <p className="text-base lg:text-lg text-gray-600 leading-relaxed">
-                  Manage employee payroll effortlessly with our comprehensive beneficiary system. 
-                  Add and verify beneficiaries with automatic bank account validation, calculate salaries 
-                  with adjustable parameters including worked days, allowances, deductions, and taxes. 
-                  Process bulk payments or send for approval, track payment history by period, and maintain 
+                  Manage employee payroll effortlessly with our comprehensive beneficiary system.
+                  Add and verify beneficiaries with automatic bank account validation, calculate salaries
+                  with adjustable parameters including worked days, allowances, deductions, and taxes.
+                  Process bulk payments or send for approval, track payment history by period, and maintain
                   detailed records of all payroll transactions with flexible status management.
                 </p>
               </div>
               <div className="relative lg:ml-auto lg:-mr-8 xl:-mr-16">
                 <div className="relative z-10">
                   <div className="rounded-l-2xl shadow-2xl overflow-hidden">
-                    <Image 
-                      src="/payroll.png" 
-                      alt="Payroll Management Dashboard" 
-                      width={700} 
+                    <Image
+                      src="/payroll.png"
+                      alt="Payroll Management Dashboard"
+                      width={700}
                       height={500}
                       className="w-full h-auto"
                     />
@@ -150,10 +174,10 @@ export default function HomePage() {
               <div className="relative lg:mr-auto lg:-ml-8 xl:-ml-16 order-2 lg:order-1">
                 <div className="relative z-10">
                   <div className="rounded-r-2xl shadow-2xl overflow-hidden">
-                    <Image 
-                      src="/invoice.png" 
-                      alt="Invoicing Dashboard" 
-                      width={700} 
+                    <Image
+                      src="/invoice.png"
+                      alt="Invoicing Dashboard"
+                      width={700}
                       height={500}
                       className="w-full h-auto"
                     />
@@ -184,19 +208,19 @@ export default function HomePage() {
                   Budget
                 </h2>
                 <p className="text-base lg:text-lg text-gray-600 leading-relaxed">
-                  Create and manage budgets across different categories to track your spending effectively. 
-                  Set spending limits, monitor expenses in real-time, and get insights on how much you&apos;ve spent 
-                  versus your budget. Stay on top of your finances with expiry dates and status tracking for 
+                  Create and manage budgets across different categories to track your spending effectively.
+                  Set spending limits, monitor expenses in real-time, and get insights on how much you&apos;ve spent
+                  versus your budget. Stay on top of your finances with expiry dates and status tracking for
                   each budget category.
                 </p>
               </div>
               <div className="relative lg:ml-auto lg:-mr-8 xl:-mr-16">
                 <div className="relative z-10">
                   <div className="rounded-l-2xl shadow-2xl overflow-hidden">
-                    <Image 
-                      src="/budget.png" 
-                      alt="Budget Dashboard" 
-                      width={700} 
+                    <Image
+                      src="/budget.png"
+                      alt="Budget Dashboard"
+                      width={700}
                       height={500}
                       className="w-full h-auto"
                     />
@@ -215,10 +239,10 @@ export default function HomePage() {
               <div className="relative lg:mr-auto lg:-ml-8 xl:-ml-16 order-2 lg:order-1">
                 <div className="relative z-10">
                   <div className="rounded-r-2xl shadow-2xl overflow-hidden">
-                    <Image 
-                      src="/team.png" 
-                      alt="Team Management Dashboard" 
-                      width={700} 
+                    <Image
+                      src="/team.png"
+                      alt="Team Management Dashboard"
+                      width={700}
                       height={500}
                       className="w-full h-auto"
                     />
@@ -269,10 +293,10 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center justify-center gap-12 lg:gap-16 max-w-4xl mx-auto">
               <div className="flex flex-col items-center gap-4">
                 <div className="w-32 h-32 rounded-full bg-white shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow duration-300 p-6">
-                  <Image 
-                    src="/ishop247-logo.jpg" 
-                    alt="Ishop247" 
-                    width={120} 
+                  <Image
+                    src="/ishop247-logo.jpg"
+                    alt="Ishop247"
+                    width={120}
                     height={120}
                     className="w-full h-full object-contain"
                   />
@@ -281,10 +305,10 @@ export default function HomePage() {
               </div>
               <div className="flex flex-col items-center gap-4">
                 <div className="w-32 h-32 rounded-full bg-white shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow duration-300 p-6">
-                  <Image 
-                    src="/emeranda-logo.jpg" 
-                    alt="Emeranda Global Investment" 
-                    width={200} 
+                  <Image
+                    src="/emeranda-logo.jpg"
+                    alt="Emeranda Global Investment"
+                    width={120}
                     height={120}
                     className="w-full h-full object-contain"
                   />
