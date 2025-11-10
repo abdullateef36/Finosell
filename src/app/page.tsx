@@ -30,14 +30,11 @@ export default function HomePage() {
 
               <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 lg:p-12 border border-white/20 shadow-2xl">
                 <p className="text-lg lg:text-xl text-white/95 leading-relaxed text-center mb-12">
-                  Finosell simplifies how growing businesses handle their finances. From creating invoices 
-                  and managing payroll to building budgets and tracking expenses, everything is designed to 
-                  keep your team organized and your numbers accurate. With Finosell, you can collaborate 
-                  effortlessly by adding team members, assigning roles, and maintaining real-time visibility 
-                  into your company&apos;s cash flow.
+                  Save more time to focus on growing your business and scaling beyond borders.
+                  From gaining real-time insights into company spending to creating accurate invoices, managing payroll, building budgets, and tracking expenses — Finosell keeps your team organized and your numbers accurate.
                 </p>
 
-                {/* Feature Grid - Reordered: Payroll, Invoicing, Budget, Team, Expense, Visibility */}
+                {/* Feature Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                   {/* Feature 1: Payroll */}
                   <div className="bg-white/5 rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300 group">
@@ -261,36 +258,38 @@ export default function HomePage() {
         </section>
 
         {/* Trusted Brands Section */}
-        <section className="bg-white py-16 lg:py-24">
+        <section className="bg-gradient-to-b from-gray-50 to-white py-16 lg:py-24 mt-10">
           <div className="container mx-auto px-6 lg:px-12">
-            <div className="text-center mb-12">
-              <p className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl lg:text-4xl font-bold text-[#273B4A] mb-4">
                 Brands that Trust & Work with Us
-              </p>
-              <h2 className="text-2xl lg:text-3xl font-bold text-[#273B4A]">
-                Join companies streamlining their finances with Finosell
               </h2>
+              <div className="w-20 h-1 bg-[#DAB22F] mx-auto"></div>
             </div>
-            <div className="flex flex-wrap items-center justify-center gap-16 lg:gap-24 max-w-5xl mx-auto">
-              <div className="flex flex-col items-center gap-3 hover:scale-105 transition-transform duration-300">
-                <Image 
-                  src="/ishop247-logo.jpg" 
-                  alt="Ishop247 Logo" 
-                  width={180} 
-                  height={80}
-                  className="w-auto h-16 md:h-20 object-contain"
-                />
-                <p className="text-sm font-medium text-gray-700">Ishop247</p>
+            <div className="flex flex-wrap items-center justify-center gap-12 lg:gap-16 max-w-4xl mx-auto">
+              <div className="flex flex-col items-center gap-4">
+                <div className="w-32 h-32 rounded-full bg-white shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow duration-300 p-6">
+                  <Image 
+                    src="/ishop247-logo.jpg" 
+                    alt="Ishop247" 
+                    width={120} 
+                    height={120}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <p className="text-sm font-medium text-[#273B4A] text-center">Ishop247</p>
               </div>
-              <div className="flex flex-col items-center gap-3 hover:scale-105 transition-transform duration-300">
-                <Image 
-                  src="/emeranda-logo.jpg" 
-                  alt="Emeranda Global Investment Logo" 
-                  width={180} 
-                  height={80}
-                  className="w-auto h-16 md:h-20 object-contain"
-                />
-                <p className="text-sm font-medium text-gray-700">Emeranda Global Investment</p>
+              <div className="flex flex-col items-center gap-4">
+                <div className="w-32 h-32 rounded-full bg-white shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow duration-300 p-6">
+                  <Image 
+                    src="/emeranda-logo.jpg" 
+                    alt="Emeranda Global Investment" 
+                    width={200} 
+                    height={120}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <p className="text-sm font-medium text-[#273B4A] text-center">Emeranda Global<br />Investment</p>
               </div>
             </div>
           </div>
