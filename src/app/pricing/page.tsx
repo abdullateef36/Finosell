@@ -6,12 +6,65 @@ import Footer from '../components/Footer';
 import { 
   FiCheck, 
   FiX, 
-  FiArrowRight
+  FiArrowRight,
+  FiLoader
 } from 'react-icons/fi';
+
+// Paystack types
+interface PaystackResponse {
+  reference: string;
+  trans: string;
+  status: string;
+  message: string;
+  transaction: string;
+  trxref: string;
+}
+
+declare global {
+  interface Window {
+    PaystackPop: {
+      setup: (config: {
+        key: string;
+        email: string;
+        amount: number;
+        currency: string;
+        ref: string;
+        metadata: Record<string, unknown>;
+        onClose: () => void;
+        callback: (response: PaystackResponse) => void;
+      }) => {
+        openIframe: () => void;
+      };
+    };
+  }
+}
+
+interface Plan {
+  name: string;
+  description: string;
+  price: number | string;
+  users: number | string;
+  planId: string;
+  features: Record<string, string | boolean | undefined>;
+  highlighted: boolean;
+}
 
 export default function PricingPage() {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
+  const [businessId, setBusinessId] = useState<string>('');
+  const [email, setEmail] = useState<string>('test@example.com'); // Temporary for testing
+  const [processingPlanId, setProcessingPlanId] = useState<string | null>(null);
+
+  // Capture query parameters on mount - COMMENTED OUT FOR TESTING
+  // useEffect(() => {
+  //   const urlParams = new URLSearchParams(window.location.search);
+  //   const businessIdParam = urlParams.get('businessId') || urlParams.get('business_id');
+  //   const emailParam = urlParams.get('email');
+  //   
+  //   if (businessIdParam) setBusinessId(businessIdParam);
+  //   if (emailParam) setEmail(emailParam);
+  // }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -42,6 +95,7 @@ export default function PricingPage() {
       description: 'Perfect for small teams getting started',
       price: 10000,
       users: 2,
+      planId: 'basic',
       features: {
         'Users': '2 users included',
         'Additional Users': '₦3,000 per user',
@@ -65,6 +119,7 @@ export default function PricingPage() {
       description: 'Best for growing businesses',
       price: 20000,
       users: 3,
+      planId: 'pro',
       features: {
         'Users': '3 users included',
         'Additional Users': '₦3,000 per user',
@@ -88,6 +143,7 @@ export default function PricingPage() {
       description: 'Enterprise-grade for scaling teams',
       price: 'Custom',
       users: 'Custom',
+      planId: 'business',
       features: {
         'Users': 'Custom users',
         'Additional Users': 'Custom pricing',
@@ -108,14 +164,96 @@ export default function PricingPage() {
     }
   ];
 
-  const calculatePrice = (basePrice: number | string) => {
+  const calculatePrice = (basePrice: number | string): number | string => {
     if (typeof basePrice === 'string') return basePrice;
     if (billingCycle === 'yearly') {
-      const yearlyPrice = basePrice * 12 * 0.85;
+      const yearlyPrice = basePrice * 12 * 0.90;
       return Math.round(yearlyPrice);
     }
     return basePrice;
   };
+
+  const handlePayment = (plan: Plan) => {
+    if (!email) {
+      alert('Email is required. Please ensure you are redirected from the webapp with your email.');
+      return;
+    }
+
+    if (typeof plan.price === 'string') {
+      alert('Please contact us for custom enterprise pricing.');
+      return;
+    }
+
+    setProcessingPlanId(plan.planId);
+
+    const calculatedPrice = calculatePrice(plan.price);
+    const amount = (typeof calculatedPrice === 'number' ? calculatedPrice : plan.price) * 100; // Paystack expects amount in kobo
+    const reference = `${plan.planId}_${businessId || 'guest'}_${Date.now()}`;
+
+    const handler = window.PaystackPop.setup({
+      key: 'pk_test_d41c2bf87390ed60af6e8851ea104be0f7489e3c',
+      email: email,
+      amount: amount,
+      currency: 'NGN',
+      ref: reference,
+      metadata: {
+        custom_fields: [
+          {
+            display_name: "Plan",
+            variable_name: "plan",
+            value: plan.name
+          },
+          {
+            display_name: "Billing Cycle",
+            variable_name: "billing_cycle",
+            value: billingCycle
+          },
+          {
+            display_name: "Business ID",
+            variable_name: "business_id",
+            value: businessId || 'N/A'
+          }
+        ]
+      },
+      onClose: function() {
+        setProcessingPlanId(null);
+        alert('Payment window closed.');
+      },
+      callback: function(response: PaystackResponse) {
+        setProcessingPlanId(null);
+        // Payment successful
+        alert('Payment successful! Reference: ' + response.reference);
+        
+        // Here you would typically:
+        // 1. Send the reference to your backend for verification
+        // 2. Activate the subscription
+        // 3. Redirect user back to your webapp
+        
+        // Example redirect back to webapp with success info
+        // const redirectUrl = `YOUR_WEBAPP_URL/payment-success?reference=${response.reference}&businessId=${businessId}&plan=${plan.planId}`;
+        // window.location.href = redirectUrl;
+        
+        console.log('Payment Reference:', response.reference);
+        console.log('Business ID:', businessId);
+        console.log('Plan:', plan.planId);
+        console.log('Billing Cycle:', billingCycle);
+      }
+    });
+
+    handler.openIframe();
+  };
+
+  // Load Paystack script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://js.paystack.co/v1/inline.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   return (
     <div className="bg-white min-h-screen">
@@ -156,7 +294,7 @@ export default function PricingPage() {
               >
                 Yearly
                 <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-0.5 rounded-full">
-                  Save 15%
+                  Save 10%
                 </span>
               </button>
             </div>
@@ -207,7 +345,7 @@ export default function PricingPage() {
                           </div>
                           {billingCycle === 'yearly' && (
                             <p className="text-sm text-green-600 mt-2">
-                              Save ₦{(plan.price * 12 * 0.15).toLocaleString()} per year
+                              Save ₦{(plan.price * 12 * 0.10).toLocaleString()} per year
                             </p>
                           )}
                         </>
@@ -217,14 +355,25 @@ export default function PricingPage() {
                     </div>
 
                     <button
+                      onClick={() => handlePayment(plan)}
+                      disabled={processingPlanId !== null}
                       className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
                         plan.highlighted
                           ? 'bg-[#DAB22F] text-white hover:bg-[#c4a029] shadow-lg hover:shadow-xl'
                           : 'bg-[#273B4A] text-white hover:bg-[#1e3240]'
-                      }`}
+                      } disabled:opacity-50 disabled:cursor-not-allowed`}
                     >
-                      Get Started
-                      <FiArrowRight className="w-5 h-5" />
+                      {processingPlanId === plan.planId ? (
+                        <>
+                          <FiLoader className="w-5 h-5 animate-spin" />
+                          Processing...
+                        </>
+                      ) : (
+                        <>
+                          Get Started
+                          <FiArrowRight className="w-5 h-5" />
+                        </>
+                      )}
                     </button>
                   </div>
 
