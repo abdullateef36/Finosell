@@ -24,9 +24,17 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 pb-12 border-b border-gray-200">
           {/* Column 1: Logo & App Store Buttons */}
           <div className="space-y-6 -mt-2">
-            <Link href="/" className="flex items-center gap-2">
-              <Image src="/Ficon.png" alt="Finosell Logo" width={32} height={32} />
-              <span className="text-[22px] font-bold text-[#273B4A]">finosell.</span>
+            <Link href="/" className="flex items-center gap-3">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-gray-200">
+                <Image
+                  src="/Ficon.png"
+                  alt="Finosell Logo"
+                  fill
+                  className="object-contain"
+                  sizes="40px"
+                />
+              </div>
+              <span className="text-xl font-semibold tracking-tight text-gray-900">Finosell.</span>
             </Link>
             <div className="flex flex-col items-start gap-3">
               <a href="#" className="bg-[#273B4A] hover:bg-[#1f2f3a] text-white px-4 py-2.5 rounded-lg flex items-center gap-3 transition-colors w-[140px]">
