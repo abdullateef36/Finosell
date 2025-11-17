@@ -53,18 +53,17 @@ export default function PricingPage() {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
   const [businessId, setBusinessId] = useState<string>('');
-  const [email, setEmail] = useState<string>('test@example.com'); // Temporary for testing
+  const [email, setEmail] = useState<string>(''); // Temporary for testing
   const [processingPlanId, setProcessingPlanId] = useState<string | null>(null);
 
-  // Capture query parameters on mount - COMMENTED OUT FOR TESTING
-  // useEffect(() => {
-  //   const urlParams = new URLSearchParams(window.location.search);
-  //   const businessIdParam = urlParams.get('businessId') || urlParams.get('business_id');
-  //   const emailParam = urlParams.get('email');
-  //   
-  //   if (businessIdParam) setBusinessId(businessIdParam);
-  //   if (emailParam) setEmail(emailParam);
-  // }, []);
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const businessIdParam = urlParams.get('businessId') || urlParams.get('business_id');
+    const emailParam = urlParams.get('email');
+    
+    if (businessIdParam) setBusinessId(businessIdParam);
+    if (emailParam) setEmail(emailParam);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -173,9 +172,10 @@ export default function PricingPage() {
     return basePrice;
   };
 
-  const handlePayment = (plan: Plan) => {
-    if (!email) {
-      alert('Email is required. Please ensure you are redirected from the webapp with your email.');
+    const handlePayment = (plan: Plan) => {
+    if (!email || !businessId) {
+      alert('Authentication required. Please login from the dashboard.');
+      window.open('https://dashboard.finosell.com', '_blank');
       return;
     }
 
