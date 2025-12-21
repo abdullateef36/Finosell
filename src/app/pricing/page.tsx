@@ -52,8 +52,8 @@ interface Plan {
 export default function PricingPage() {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
-  const [businessId, setBusinessId] = useState<string>('');
-  const [email, setEmail] = useState<string>(''); 
+  const [businessId, setBusinessId] = useState<string>('1234564758');
+  const [email, setEmail] = useState<string>('example@gmail.com'); 
   const [processingPlanId, setProcessingPlanId] = useState<string | null>(null);
 
   useEffect(() => {
